@@ -401,30 +401,19 @@ export default {
 	},
 	methods: {
 		bindEvents () {
-			if (this.isMobile) {
-				this.$refs.wrap.addEventListener('touchmove', this.moving)
-				this.$refs.wrap.addEventListener('touchend', this.moveEnd)
-			}
-			else {
-				document.addEventListener('mousemove', this.moving)
-				document.addEventListener('mouseup', this.moveEnd)
-				document.addEventListener('mouseleave', this.moveEnd)
+			document.addEventListener('mousemove', this.moving)
+			document.addEventListener('mouseup', this.moveEnd)
+			document.addEventListener('mouseleave', this.moveEnd)
 
-				window.addEventListener('resize', this.refresh)
-			}
+			window.addEventListener('resize', this.refresh)
 		},
 		unbindEvents () {
 			window.removeEventListener('resize', this.refresh)
-
-			if (this.isMobile) {
-				this.$refs.wrap.removeEventListener('touchmove', this.moving)
-				this.$refs.wrap.removeEventListener('touchend', this.moveEnd)
-			}
-			else {
-				document.removeEventListener('mousemove', this.moving)
-				document.removeEventListener('mouseup', this.moveEnd)
-				document.removeEventListener('mouseleave', this.moveEnd)
-			}
+			this.$refs.wrap.removeEventListener('touchmove', this.moving)
+			this.$refs.wrap.removeEventListener('touchend', this.moveEnd)
+			document.removeEventListener('mousemove', this.moving)
+			document.removeEventListener('mouseup', this.moveEnd)
+			document.removeEventListener('mouseleave', this.moveEnd)
 		},
 		formatting (value) {
 			return typeof this.formatter === 'string' ? this.formatter.replace(/\{value\}/, value) : this.formatter(value)
